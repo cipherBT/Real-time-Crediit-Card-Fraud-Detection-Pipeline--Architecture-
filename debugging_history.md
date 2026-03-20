@@ -49,8 +49,6 @@
 * Changed `threshold = 0.60` explicitly to `threshold = 0.48`. This perfectly offset the model's conservative bias.
 
 ### 7. Interactive Prediction Tooling (`ui/app.py` & `dags/predict_manual.py`)
-**Initial State**: Headless environment required Cloud UI parsing. 
-**The Fixes**:
 * **CLI Wrapper**: Created `src/dags/predict_manual.py` that loads `/app/models/fraud_detection_model.pkl` to process a hardcoded Pandas Dictionary representing exactly 1 transaction in 15 seconds.
 * **Custom Streamlit Web Dashboard**: Built a completely new `ui/app.py` interface.
   * Used `@st.cache_resource` for O(1) model loading. Bound input sliders to an interactive Dataframe triggering `predict_proba`.

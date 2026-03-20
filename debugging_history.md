@@ -11,7 +11,7 @@
   ```
   This single change preserved 100% of the minority incidents while preventing RAM exhaustion.
 * **XGBoost Threading (Line ~352)**: Redefined `n_jobs=1` inside `RandomizedSearchCV` instead of `-1` to prevent CPU parallel threads from violently multiplying maximum memory allocation boundaries footprint.
-* **Optimization Balance (Line ~335)**: Restored `n_iter=20` and `SMOTE(sampling_strategy=0.5)` to violently bias the data for maximum precision.
+* **Optimization Balance (Line ~335)**: `n_iter=20` and `SMOTE(sampling_strategy=0.5)` to violently bias the data for maximum precision.
 
 ### 2. Scikit-Learn Container Version Mismatch (`requirements.txt`)
 **Initial State**: Airflow Model trained on Python 3.12 (Scikit 1.6+). Inference decoded on Python 3.10 (Scikit 1.5.0). 

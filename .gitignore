@@ -1,0 +1,29 @@
+# Virtual Environment
+venv/
+env/
+.env
+
+# Massive Data Files (GitHub restricts files >100MB)
+FraudDataset/
+data/
+
+# Logs and Checkpoints
+logs/
+out.log
+inference_logs.txt
+inference_logs2.txt
+checkpoints/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# IDE files
+.vscode/
+.idea/
+
+# Large Machine Learning Models
+models/*.pkl
+models/*.joblib

@@ -1,0 +1,51 @@
+mlflow:
+  experiment_name: "credit_card_fraud_detection"
+  registered_model_name: "credit_card_fraud_xgboost"
+  tracking_uri: "http://mlflow-server:7500"
+  artifact_location: "s3://mlflow/credit_card_fraud"
+  s3_endpoint_url: "http://minio:9000"
+  bucket: "mlflow"
+
+kafka:
+  bootstrap_servers: "pkc-619z3.us-east1.gcp.confluent.cloud:9092"
+  username: "KA6R7ROSPMWWBIIQ"
+  password: "cfltN6qX4Gc385Ec4Z7Suszv+QQDFLVeVULapcuZeboBxgMb+O9bK1R8dfG0jtmQ"
+  topic: "transactions"
+  output_topic: "fraud_predictions"
+  security_protocol: 'SASL_SSL'
+  timeout: 30000
+
+# Data source configuration for CSV-based processing
+data:
+  raw_path: "./FraudDataset"
+  processed_path: "/app/data/processed"
+  train_file: "processed_train.csv"
+  test_file: "processed_test.csv"
+
+# Feature configuration
+features:
+  high_risk_categories:
+    - "gas_transport"
+    - "misc_net"
+    - "grocery_pos"
+    - "shopping_net"
+    - "misc_pos"
+
+model:
+  test_size: 0.2
+  seed: 42
+  params:
+    n_estimators: 300
+    learning_rate: 0.05
+    max_depth: 5
+    subsample: 0.8
+    colsample_bytree: 0.8
+    scale_pos_weight: 1
+    tree_method: "hist"
+  path: "/app/models/fraud_detection_model.pkl"
+
+spark:
+  app_name: "CreditCardFraudInference"
+  packages: "org.mlflow:mlflow-spark:2.6.0,com.google.guava:guava:30.1.1-jre,org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.4,org.apache.hadoop:hadoop-aws:3.3.0,com.amazonaws:aws-java-sdk:1.11.469"
+  shuffle_partition: 200
+  checkpoint_location: 'checkpoints'

@@ -93,7 +93,7 @@ KAFKA_USERNAME=
 ```
 
 **Step 2. Download the Dataset**
-Download the [Credit Card Fraud Detection Dataset from Kaggle](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud/data).
+Download the [Credit Card Fraud Detection Dataset from Kaggle](https://www.kaggle.com/datasets/kartik2112/fraud-detection/data).
 Extract the downloaded archive and place the `creditcard.csv` file inside a directory named `FraudDataset` in the root of the project.
 
 **Step 3. Run the Initial Preprocessing Script**

@@ -14,7 +14,7 @@ def load_model():
 
 model = load_model()
 
-st.title("💳 Real-Time Fraud Predictor UI")
+st.title("💳Real-Time Fraud Predictor")
 st.markdown("Enter transaction details below to get an instant prediction from the trained XGBoost model.")
 
 if model is None:
@@ -26,9 +26,9 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.subheader("Transaction Details")
-    amt = st.number_input("Transaction Amount ($)", value=850.00, min_value=0.0)
-    amt_log = st.number_input("Amount Log (Auto-calculated if 0)", value=0.0)
-    merchant = st.text_input("Merchant Name", value="fraud_store_123")
+    amt = st.number_input("Transaction Amount ($)", value=8500, min_value=0)
+    amt_log = st.number_input("Amount Log (Auto-calculated if 0)", value=0)
+    merchant = st.text_input("Merchant Name", value="fraud_store")
     category = st.selectbox("Category", ["shopping_net", "grocery_pos", "gas_transport", "misc_net", "misc_pos", "entertainment", "dining"])
     
 with col2:
@@ -38,7 +38,7 @@ with col2:
     trans_month = st.slider("Month", 1, 12, 12)
     distance_km = st.number_input("Distance from User (km)", value=50.0)
     state = st.text_input("State (Abbreviation)", value="NY")
-    city_pop = st.number_input("City Population", value=50000)
+    city_pop = st.number_input("City Population", value=500000)
 
 with col3:
     st.subheader("User Demographics")
@@ -54,7 +54,7 @@ with col3:
 
 st.markdown("---")
 
-if st.button("🔍 Predict Fraud", type="primary", use_container_width=True):
+if st.button("🔍Predict Fraud", type="primary", use_container_width=True):
     import math
     if amt_log == 0.0 and amt > 0:
         amt_log = math.log(amt)
@@ -85,9 +85,9 @@ if st.button("🔍 Predict Fraud", type="primary", use_container_width=True):
         is_fraud = probability >= threshold
         
         if is_fraud:
-            st.error(f"### 🚨 VERDICT: FRAUD DETECTED!\n**Probability Score:** {probability:.4f} (Threshold: {threshold})")
+            st.error(f"### 🚨VERDICT: FRAUD DETECTED!\n**Probability Score:** {probability:.4f} (Threshold: {threshold})")
         else:
-            st.success(f"### ✅ VERDICT: LEGITIMATE\n**Probability Score:** {probability:.4f} (Threshold: {threshold})")
+            st.success(f"### ✅VERDICT: LEGITIMATE\n**Probability Score:** {probability:.4f} (Threshold: {threshold})")
             
         with st.expander("View Raw Model Input"):
             st.json(transaction)
